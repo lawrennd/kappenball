@@ -8,6 +8,9 @@ pytest-cov>=4.0
 black>=23.0
 ruff>=0.1.0
 
+# Jupyter notebook management
+nbstripout>=0.6.0
+
 # Documentation (if needed later)
 sphinx>=5.0
 sphinx-rtd-theme>=1.0

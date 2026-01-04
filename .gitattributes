@@ -1,0 +1,5 @@
+# Git attributes for Kappenball
+
+# Jupyter notebooks - strip outputs before committing
+*.ipynb filter=nbstripout
+

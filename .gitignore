@@ -22,6 +22,10 @@ htmlcov/
 .mypy_cache/
 .ruff_cache/
 
+# Jupyter notebook checkpoints
+.ipynb_checkpoints/
+*/.ipynb_checkpoints/
+
 # Virtual environments
 .venv/
 venv/
