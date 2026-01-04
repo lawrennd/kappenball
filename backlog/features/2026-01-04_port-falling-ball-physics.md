@@ -1,8 +1,8 @@
 ---
 id: "2026-01-04_port-falling-ball-physics"
 title: "Port falling ball physics simulation from MATLAB to Python"
-status: "Proposed"
-priority: "Medium"
+status: "Completed"
+priority: "High"
 created: "2026-01-04"
 last_updated: "2026-01-04"
 category: "features"

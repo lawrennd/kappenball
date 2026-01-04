@@ -195,3 +195,93 @@ def test_velocity_scale():
     
     plt.close(fig)
 
+
+# ============================================================================
+# Kappenball (Falling Ball) Visualisation Tests
+# ============================================================================
+
+
+def test_setup_kappenball_figure():
+    """Test Kappenball figure setup."""
+    from kappenball import falling_ball
+    
+    state = falling_ball.initialise()
+    fig, ax = visualisation.setup_kappenball_figure(state)
+    
+    assert isinstance(fig, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+    
+    # Check axis limits
+    assert ax.get_xlim() == tuple(state['box_xlim'])
+    assert ax.get_ylim() == tuple(state['box_ylim'])
+    
+    plt.close(fig)
+
+
+def test_plot_kappenball_frame():
+    """Test plotting a single Kappenball frame."""
+    from kappenball import falling_ball
+    
+    state = falling_ball.initialise()
+    fig, ax = visualisation.setup_kappenball_figure(state)
+    
+    artists = visualisation.plot_kappenball_frame(ax, state, show_stats=True)
+    
+    assert len(artists) > 0
+    assert any(isinstance(a, plt.Circle) for a in artists)
+    
+    plt.close(fig)
+
+
+def test_plot_kappenball_static():
+    """Test static Kappenball plot."""
+    from kappenball import falling_ball
+    
+    state = falling_ball.initialise()
+    fig, ax = visualisation.plot_kappenball_static(state)
+    
+    assert isinstance(fig, plt.Figure)
+    assert isinstance(ax, plt.Axes)
+    
+    plt.close(fig)
+
+
+def test_animate_kappenball():
+    """Test Kappenball animation creation."""
+    from kappenball import falling_ball
+    
+    state = falling_ball.initialise(random_state=42)
+    
+    # Create short animation
+    fig, anim = visualisation.animate_kappenball(
+        state,
+        num_steps=50,
+        interval=20
+    )
+    
+    assert isinstance(fig, plt.Figure)
+    assert anim is not None
+    
+    plt.close(fig)
+
+
+def test_animate_kappenball_with_controls():
+    """Test Kappenball animation with control sequence."""
+    from kappenball import falling_ball
+    
+    state = falling_ball.initialise(random_state=42)
+    
+    # Create control sequence
+    controls = ['left'] * 10 + [None] * 20 + ['right'] * 10
+    
+    fig, anim = visualisation.animate_kappenball(
+        state,
+        num_steps=40,
+        control_sequence=controls
+    )
+    
+    assert isinstance(fig, plt.Figure)
+    assert anim is not None
+    
+    plt.close(fig)
+

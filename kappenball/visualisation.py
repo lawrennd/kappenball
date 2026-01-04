@@ -18,7 +18,7 @@ import matplotlib.pyplot as plt
 from matplotlib.animation import FuncAnimation
 from matplotlib.patches import Circle, Rectangle
 from matplotlib.collections import PatchCollection
-from typing import Optional, List, Tuple
+from typing import Optional, List, Tuple, Any
 
 
 def setup_figure(
@@ -339,5 +339,259 @@ def plot_energy_evolution(
     ax.axhline(mean_energy, color='red', linestyle='--', linewidth=2, 
                label=f'Mean: {mean_energy:.2e}')
     ax.legend()
+    
+    return fig, ax
+
+
+# ============================================================================
+# Falling Ball (Kappenball) Visualisation Functions
+# ============================================================================
+
+
+def setup_kappenball_figure(
+    state: dict,
+    figsize: tuple[float, float] = (10, 12),
+    screen_colour: tuple[float, float, float] = (0.4, 0.5, 0.8)
+) -> Tuple[plt.Figure, plt.Axes]:
+    """
+    Set up figure specifically for Kappenball game visualisation.
+    
+    Args:
+        state: Simulation state dict from falling_ball.initialise()
+        figsize: Figure size (width, height) in inches
+        screen_colour: RGB colour for background
+        
+    Returns:
+        tuple: (fig, ax) matplotlib figure and axis objects
+    """
+    from kappenball import falling_ball
+    
+    fig, ax = plt.subplots(figsize=figsize)
+    
+    xlim = state['box_xlim']
+    ylim = state['box_ylim']
+    hole_center = state['hole_center']
+    hole_width = state['hole_width']
+    pin_height = state['pin_height']
+    
+    # Set up axes
+    ax.set_xlim(xlim)
+    ax.set_ylim(ylim)
+    ax.set_aspect('equal')
+    ax.set_facecolor(screen_colour)
+    ax.axis('off')
+    
+    # Draw walls (three sections with two holes)
+    box_width = 5
+    left_wall_right = -hole_center - hole_width / 2
+    hole_left = -hole_center + hole_width / 2
+    hole_right = hole_center - hole_width / 2
+    right_wall_left = hole_center + hole_width / 2
+    
+    # Left wall
+    ax.plot([xlim[0], xlim[0], left_wall_right, left_wall_right],
+            [ylim[1], -pin_height, -pin_height, ylim[0]],
+            'k-', linewidth=box_width)
+    
+    # Center wall (between two holes)
+    ax.plot([hole_left, hole_left, hole_right, hole_right],
+            [ylim[0], -pin_height, -pin_height, ylim[0]],
+            'k-', linewidth=box_width)
+    
+    # Right wall
+    ax.plot([right_wall_left, right_wall_left, xlim[1], xlim[1]],
+            [ylim[0], -pin_height, -pin_height, ylim[1]],
+            'k-', linewidth=box_width)
+    
+    # Draw pins
+    pins_x, pins_y = falling_ball.get_pin_positions(state)
+    ax.plot(pins_x, pins_y, 'b-', linewidth=2)
+    
+    return fig, ax
+
+
+def plot_kappenball_frame(
+    ax: plt.Axes,
+    state: dict,
+    show_stats: bool = True
+) -> List:
+    """
+    Plot one frame of Kappenball game state.
+    
+    Args:
+        ax: Matplotlib axis to plot on
+        state: Simulation state dict
+        show_stats: Whether to show score/energy statistics
+        
+    Returns:
+        list: List of artist objects for animation
+    """
+    from kappenball import falling_ball
+    
+    artists = []
+    
+    # Draw ball
+    ball = plt.Circle(
+        state['x'],
+        state['r'],
+        color='red',
+        zorder=10
+    )
+    ax.add_patch(ball)
+    artists.append(ball)
+    
+    # Add statistics text if requested
+    if show_stats:
+        xlim = state['box_xlim']
+        ylim = state['box_ylim']
+        
+        # Score
+        score_txt = ax.text(
+            xlim[0], ylim[1] + 1,
+            f"Score: {state['score']}",
+            fontsize=20,
+            ha='right',
+            va='bottom'
+        )
+        artists.append(score_txt)
+        
+        # Energy count
+        energy_txt = ax.text(
+            xlim[1], ylim[1] + 1,
+            f"Energy: {state['energy_count']}",
+            fontsize=20,
+            ha='right',
+            va='bottom'
+        )
+        artists.append(energy_txt)
+        
+        # Average energy per score
+        avg_energy = falling_ball.get_average_energy(state)
+        avg_txt = '-' if np.isnan(avg_energy) else f'{avg_energy:.2f}'
+        average_txt = ax.text(
+            (xlim[1] - xlim[0]) / 2 + xlim[0], ylim[1] + 1,
+            f"Average: {avg_txt}",
+            fontsize=20,
+            ha='right',
+            va='bottom'
+        )
+        artists.append(average_txt)
+        
+        # Show collision feedback
+        if state.get('last_collision') == 'bang':
+            bang_txt = ax.text(
+                state['x'][0], state['x'][1],
+                'BANG!',
+                fontsize=24,
+                color='red',
+                ha='center',
+                va='center',
+                weight='bold'
+            )
+            artists.append(bang_txt)
+    
+    return artists
+
+
+def animate_kappenball(
+    state: dict,
+    num_steps: int = 500,
+    dt: float = 0.01,
+    interval: int = 20,
+    figsize: tuple[float, float] = (10, 12),
+    control_sequence: Optional[list] = None
+) -> Tuple[plt.Figure, Any]:
+    """
+    Create animated visualisation of Kappenball game.
+    
+    Args:
+        state: Initial simulation state
+        num_steps: Number of simulation steps to run
+        dt: Time step for simulation
+        interval: Delay between frames in milliseconds
+        figsize: Figure size (width, height)
+        control_sequence: Optional list of control inputs ('left', 'right', None)
+                         for each step
+        
+    Returns:
+        tuple: (fig, animation) matplotlib figure and animation objects
+    """
+    from matplotlib import animation
+    from kappenball import falling_ball
+    
+    # Generate trajectory
+    trajectory = [state.copy()]
+    current_state = state.copy()
+    
+    for i in range(num_steps):
+        control = None
+        if control_sequence and i < len(control_sequence):
+            control = control_sequence[i]
+        
+        current_state = falling_ball.simulate_step(
+            current_state,
+            dt=dt,
+            control_input=control
+        )
+        trajectory.append(current_state.copy())
+    
+    # Set up figure
+    fig, ax = setup_kappenball_figure(state, figsize=figsize)
+    
+    # Animation update function
+    def update(frame):
+        # Clear previous artists
+        for artist in ax.patches[:]:
+            if isinstance(artist, plt.Circle):
+                artist.remove()
+        for txt in ax.texts[:]:
+            txt.remove()
+        
+        # Plot new frame
+        artists = plot_kappenball_frame(ax, trajectory[frame])
+        return artists
+    
+    # Create animation
+    anim = animation.FuncAnimation(
+        fig,
+        update,
+        frames=len(trajectory),
+        interval=interval,
+        blit=False,
+        repeat=True
+    )
+    
+    return fig, anim
+
+
+def plot_kappenball_static(
+    state: dict,
+    show_stats: bool = True,
+    title: str = "Kappenball",
+    save_path: Optional[str] = None,
+    figsize: tuple[float, float] = (10, 12)
+) -> Tuple[plt.Figure, plt.Axes]:
+    """
+    Create a static plot of Kappenball game state.
+    
+    Args:
+        state: Simulation state dict
+        show_stats: Whether to show score/energy statistics
+        title: Figure title
+        save_path: Optional path to save figure
+        figsize: Figure size (width, height)
+        
+    Returns:
+        tuple: (fig, ax) matplotlib figure and axis objects
+    """
+    fig, ax = setup_kappenball_figure(state, figsize=figsize)
+    
+    if title:
+        fig.suptitle(title, fontsize=16)
+    
+    plot_kappenball_frame(ax, state, show_stats=show_stats)
+    
+    if save_path:
+        fig.savefig(save_path, dpi=150, bbox_inches='tight')
     
     return fig, ax
