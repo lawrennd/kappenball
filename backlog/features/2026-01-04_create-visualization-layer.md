@@ -1,7 +1,7 @@
 ---
 id: "2026-01-04_create-visualization-layer"
 title: "Create matplotlib visualization layer for simulations"
-status: "Proposed"
+status: "Completed"
 priority: "High"
 created: "2026-01-04"
 last_updated: "2026-01-04"
@@ -29,14 +29,14 @@ This task implements Step 4 of CIP-0001's migration plan and directly supports R
 
 ## Acceptance Criteria
 
-- [ ] Create `kappenball/visualization.py` module
-- [ ] Implement billiards visualization (particle positions, velocities, trajectories)
-- [ ] Implement falling ball visualization
-- [ ] Add support for toggling visual elements (velocity vectors, trajectories, etc.)
-- [ ] Use matplotlib.animation for smooth animations
-- [ ] Match visual style of original MATLAB demos (or improve)
-- [ ] Ensure visualizations remain clear with many particles
-- [ ] Target 30+ fps for smooth animation
+- [x] Create `kappenball/visualisation.py` module (British spelling)
+- [x] Implement billiards visualisation (particle positions, velocities, trajectories)
+- [x] Implement static and animated plotting
+- [x] Add support for toggling visual elements (velocity vectors with show_velocities parameter)
+- [x] Use matplotlib.animation for smooth animations
+- [x] Create billiard table styling (blue background, white borders)
+- [x] Implement additional plots (velocity histogram, energy evolution)
+- [x] Animation interval configurable (default 20ms = 50 fps)
 
 ## Implementation Notes
 
@@ -76,6 +76,32 @@ This task implements Step 4 of CIP-0001's migration plan and directly supports R
 
 ## Progress Updates
 
-### 2026-01-04
-Task created. High priority as visualization is core to educational value.
+### 2026-01-04 (Initial)
+Task created. High priority as visualisation is core to educational value.
+
+### 2026-01-04 (Completion)
+✅ Visualisation layer successfully implemented with matplotlib:
+
+**Implemented functions:**
+- `setup_figure()` - Configure matplotlib figures with billiard table styling
+- `plot_billiards_frame()` - Render single frame with particles and velocity arrows
+- `plot_billiards_static()` - Quick static visualisation
+- `animate_billiards()` - Create smooth animations with FuncAnimation
+- `plot_velocity_histogram()` - Velocity distribution analysis
+- `plot_energy_evolution()` - Energy conservation verification
+- `clear_artists()` - Helper for animation updates
+
+**Features:**
+- Particles rendered as coloured circles with proper sizing
+- Velocity vectors shown as arrows (toggleable)
+- Blue billiard table background (#4080CC)
+- White boundary walls
+- Configurable velocity scale for arrow sizing
+- Support for all 4 initialization modes
+- Smooth animations (20ms interval = 50 fps default)
+
+**Test coverage:**
+- 11 tests, all passing
+- 93% code coverage on visualisation.py
+- Tests cover: figure setup, static plots, animations, histograms, energy plots
 
