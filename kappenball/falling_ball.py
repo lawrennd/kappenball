@@ -5,7 +5,7 @@ Provides functions for simulating a falling ball with probabilistic outcomes,
 demonstrating uncertainty and stochastic processes.
 
 Functions:
-    initialize: Initialize falling ball simulation state
+    initialize: Initialise falling ball simulation state
     simulate: Run falling ball simulation step
     apply_control: Apply keyboard/control input to ball dynamics
 """
@@ -13,9 +13,9 @@ Functions:
 import numpy as np
 
 
-def initialize(initial_position=None, initial_velocity=None, gravity=9.81):
+def initialise(initial_position=None, initial_velocity=None, gravity=9.81):
     """
-    Initialize falling ball simulation.
+    Initialise falling ball simulation.
     
     Args:
         initial_position: Initial (x, y) position, defaults to (0, 10)
@@ -34,7 +34,7 @@ def simulate(state, dt=0.01, n_steps=1):
     Simulate falling ball physics for n_steps.
     
     Args:
-        state: Simulation state dict from initialize()
+        state: Simulation state dict from initialise()
         dt: Time step for simulation
         n_steps: Number of steps to simulate
         
