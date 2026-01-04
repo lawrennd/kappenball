@@ -1,0 +1,48 @@
+
+# VibeSafe System Files (Auto-added during installation)
+# These are VibeSafe infrastructure - not your project content
+
+# IDE-specific files
+*.code-workspace
+
+# VibeSafe virtual environment
+.venv-vibesafe/
+
+# Backlog system files
+backlog/README.md
+backlog/task_template.md
+backlog/update_index.py
+backlog/index.md
+
+# CIP system files  
+cip/README.md
+cip/cip_template.md
+
+# Cursor AI rules (VibeSafe-managed)
+.cursor/rules/
+# Generated project tenet cursor rules
+.cursor/rules/project_tenet_*.mdc
+
+# VibeSafe scripts and tools
+scripts/whats_next.py
+install-whats-next.sh
+whats-next
+
+# VibeSafe templates directory (source files for VibeSafe development)
+templates/
+
+# Requirements framework (VibeSafe-managed)
+requirements/README.md
+requirements/requirement_template.md
+
+# VibeSafe validation script
+scripts/validate_vibesafe_structure.py
+
+# Tenets system files
+tenets/README.md
+tenets/tenet_template.md
+tenets/combine_tenets.py
+
+# VibeSafe documentation (system files)
+docs/whats_next_script.md
+docs/yaml_frontmatter_examples.md
