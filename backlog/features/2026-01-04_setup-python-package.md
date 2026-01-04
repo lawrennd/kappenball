@@ -1,7 +1,7 @@
 ---
 id: "2026-01-04_setup-python-package"
 title: "Set up Python package structure for Kappenball"
-status: "Proposed"
+status: "Completed"
 priority: "High"
 created: "2026-01-04"
 last_updated: "2026-01-04"
@@ -29,13 +29,13 @@ This task implements the first step of CIP-0001's migration plan.
 
 ## Acceptance Criteria
 
-- [ ] Create `kappenball/` package directory with `__init__.py`
-- [ ] Create subdirectories: `notebooks/`, `tests/`
-- [ ] Create `requirements.txt` with minimal core dependencies (numpy, matplotlib, jupyter, ipywidgets, ipympl)
-- [ ] Create `pyproject.toml` for package installation
-- [ ] Create `.gitignore` for Python-specific files (*.pyc, __pycache__, .pytest_cache, etc.)
-- [ ] Verify package can be installed in development mode: `pip install -e .`
-- [ ] Create basic README.md with installation instructions
+- [x] Create `kappenball/` package directory with `__init__.py`
+- [x] Create subdirectories: `notebooks/`, `tests/`
+- [x] Create `requirements.txt` with minimal core dependencies (numpy, matplotlib, jupyter, ipywidgets, ipympl)
+- [x] Create `pyproject.toml` for package installation
+- [x] Create `.gitignore` for Python-specific files (*.pyc, __pycache__, .pytest_cache, etc.)
+- [x] Verify package can be installed in development mode: `pip install -e .`
+- [x] Create basic README.md with installation instructions
 
 ## Implementation Notes
 
@@ -75,6 +75,16 @@ kappenball/
 
 ## Progress Updates
 
-### 2026-01-04
+### 2026-01-04 (Initial)
 Task created as first step of Python migration.
+
+### 2026-01-04 (Completion)
+✅ Package structure complete:
+- Python package with 4 modules (billiards, falling_ball, physics, visualisation - British spelling)
+- pyproject.toml with minimal dependencies
+- requirements.txt and requirements-dev.txt
+- tests/ directory with passing tests (3/3 passed, 63% coverage)
+- Updated .gitignore for Python artifacts
+- Updated README with installation instructions
+- Package successfully installs with `pip install -e .`
 

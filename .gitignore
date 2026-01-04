@@ -5,6 +5,29 @@
 # IDE-specific files
 *.code-workspace
 
+# Python-specific files
+*.pyc
+*.pyo
+*.pyd
+__pycache__/
+*.so
+*.egg
+*.egg-info/
+dist/
+build/
+.pytest_cache/
+.coverage
+htmlcov/
+.tox/
+.mypy_cache/
+.ruff_cache/
+
+# Virtual environments
+.venv/
+venv/
+ENV/
+env/
+
 # VibeSafe virtual environment
 .venv-vibesafe/
 
