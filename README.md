@@ -1,6 +1,6 @@
 # Kappenball
 
-Interactive physics simulations for uncertainty education. Originally created in MATLAB (2012), modernized for Python + Jupyter (2026).
+Interactive physics simulations for uncertainty education. Originally created in MATLAB (2012), modernised for Python + Jupyter (2026).
 
 ## Project Tenets
 
@@ -50,30 +50,54 @@ jupyter notebook
 # Open notebooks in the notebooks/ directory
 ```
 
+## What's Included
+
+### 🎮 Kappenball Game
+The main interactive demonstration! Guide a falling ball through holes in a pin array while managing uncertainty. Learn about:
+- Stochastic control
+- Probability and randomness
+- Energy-efficiency trade-offs
+- Optimal control strategies
+
+**Try it**: `notebooks/kappenball_game.ipynb`
+
+### 🎱 Entropy Billiards
+Watch ordered particles evolve into chaos! Demonstrates:
+- Entropy increase (2nd law of thermodynamics)
+- Thermalisation and equilibration
+- Energy conservation
+- Velocity distributions
+
+**Try it**: `notebooks/entropy_billiards.ipynb`
+
 ## Project Structure
 
 ```
 kappenball/
-├── kappenball/           # Python package
-│   ├── billiards.py      # Billiards physics simulation
-│   ├── falling_ball.py   # Falling ball simulation
-│   ├── physics.py        # Core physics utilities
-│   └── visualization.py  # Matplotlib visualization
-├── notebooks/            # Jupyter notebooks (demos)
-├── matlab/              # Original MATLAB code (2012, reference)
-├── tests/               # Unit tests
-├── requirements.txt     # Core dependencies
-└── README.md           # This file
+├── kappenball/              # Python package
+│   ├── billiards.py         # Billiards physics (98% test coverage)
+│   ├── falling_ball.py      # Kappenball game physics (98% test coverage)
+│   ├── physics.py           # Core physics utilities
+│   └── visualisation.py     # Matplotlib visualisation (90% test coverage)
+├── notebooks/               # Interactive Jupyter notebooks
+│   ├── kappenball_game.ipynb      # Main game demonstration
+│   └── entropy_billiards.ipynb    # Entropy/thermodynamics demo
+├── matlab/                  # Original MATLAB code (2012, reference)
+├── tests/                   # Unit tests (44 tests, 93% coverage)
+├── requirements.txt         # Core dependencies
+└── README.md               # This file
 ```
 
 ## Status
 
-🚧 **Migration in progress** from MATLAB to Python + Jupyter (see [CIP-0001](cip/cip0001.md))
+✅ **Core implementation complete!** (see [CIP-0001](cip/cip0001.md) for details)
 
 - ✅ Package structure created
-- 🔄 Physics porting in progress
-- 🔄 Visualization layer in development
-- 🔄 Interactive notebooks coming soon
+- ✅ Billiards physics ported and tested
+- ✅ Kappenball game physics ported and tested  
+- ✅ Visualisation layer implemented
+- ✅ Interactive notebooks created
+- ✅ 93% test coverage (44 tests passing)
 
 ## Development
 
