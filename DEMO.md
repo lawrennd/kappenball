@@ -13,7 +13,7 @@ This script lives on the `master` branch. After a demo run, VibeSafe will have c
 
 ```bash
 git checkout master
-git reset --hard 267ce31
+git reset --hard 4c7b025
 git clean -fd
 ```
 
