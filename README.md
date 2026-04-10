@@ -35,5 +35,5 @@ To reset to the clean demo starting point at any time:
 ```bash
 git checkout main
 git reset --hard demo-start
-git clean -fdx
+git clean -fd
 ```

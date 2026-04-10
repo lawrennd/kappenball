@@ -1,0 +1,15 @@
+# IDE workspace files — preserved across demo resets
+*.code-workspace
+.idea/
+*.swp
+
+# macOS
+.DS_Store
+
+# Python artefacts
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
+.coverage
+.pytest_cache/

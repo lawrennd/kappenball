@@ -14,15 +14,15 @@ This script lives on the `main` branch, tagged `demo-start`. After a demo run, V
 ```bash
 git checkout main
 git reset --hard demo-start
-git clean -fdx
+git clean -fd
 ```
 
 - `reset --hard` rewinds `main` to the `demo-start` tag, undoing any commits made during the demo
-- `clean -fdx` removes **all** untracked files and directories including hidden ones (`.cursor/` with VibeSafe cursor rules, `.venv-vibesafe/`, etc.)
+- `clean -fd` removes untracked files and directories (`.cursor/`, `.venv-vibesafe/`, `tenets/`, `cip/`, etc.)
 
-After running these, `ls -a` should show only: `. .. .git README.md DEMO.md matlab/`
+Files listed in `.gitignore` — such as `*.code-workspace` and IDE settings — are preserved across resets.
 
-> **Note on `-x` flag**: `git clean -fdx` also removes files that are listed in `.gitignore`. This is intentional — we want a truly clean slate including any cached artefacts. If a `.gitignore` is added to the repo in future, review this step.
+After running these, `ls` should show only: `DEMO.md  README.md  matlab/`
 
 ### At the Start of Each Demo
 
