@@ -1,38 +1,34 @@
 # Kappenball × VibeSafe: Live Demo Script
 
+This is a outline script for demonstrating the VibeSafe framework while introducing the game Kappenball. 
+
 **Purpose**: Demonstrate the VibeSafe WHY → WHAT → HOW → DO → BUILD process.  
 **Starting state**: Original 2012 MATLAB code only (`matlab/` + `README.md`).  
 **End state**: A JavaScript web app, built live through structured AI-assisted development.  
 **Estimated time**: 45–60 minutes.
 
----
+## The Story (Tell This First)
 
-## Resetting for a Fresh Demo
+> "When I became a professor in Sheffield in 2012, I gave an inaugural lecture that was focussed on uncertainty. I wrote this game, Kappenball, to demonstrate how uuncertainty drives decision making. Kappenball  was inspired by a talk on stochastic optimal control from my colleague, Bern Kappen.  
 
-This script lives on the `main` branch, tagged `demo-start`. After a demo run, VibeSafe will have created directories and files (`tenets/`, `cip/`, `backlog/`, `requirements/`, `scripts/`, `whats-next`, `.venv-vibesafe/`, `.cursor/`) and you may have committed files. Run these commands to wipe everything and return to the clean starting state:
+> The set up follows one of his control problems he demonstrated at Cumberland Lodge in 2006. 
 
-```bash
-git checkout main
-git reset --hard demo-start
-git clean -fd
-```
-
-- `reset --hard` rewinds `main` to the `demo-start` tag, undoing any commits made during the demo
-- `clean -fd` removes untracked files and directories (`.cursor/`, `.venv-vibesafe/`, `tenets/`, `cip/`, etc.)
-
-Files listed in `.gitignore` — such as `*.code-workspace` and IDE settings — are preserved across resets.
-
-After running these, `ls` should show only: `DEMO.md  README.md  matlab/`
+> We'll see the game later (if everything works!) but the basic idea is there's a a falling ball whose trajectory is uncertain, and where you have to control it to land in the right place. The idea connects to decision-making under uncertainty and the mathematics of procrastination — when is it optimal to wait rather than act? I ended up calling it Kappenball. It's like an early version of Flappy bird but without the revenue.
+>
+> The problem is it requires MATLAB. Today it's 2026 and I don't have Matlab installed any more. I want to modernise it — but more importantly, I want to show you how to use AI assistance *with structure*, so you're not just vibe-coding into the void. You're laying down what I call "breadcrumbs". And like Hansel and Gretel you can use these breadcrumbs to navigate your way around the code base.
+>
+> That structure is called VibeSafe. Let's open our repo, take a look and install VibeSafe!"
 
 ### At the Start of Each Demo
-
-VibeSafe and its Cursor rules must be reinstalled fresh each time. This is the first live step of the demo:
+> Vibesafe and its agent rules must be reinstalled fresh each time. This is the first live step of the demo. Ask the agent to run the VibeSafe install script.
 
 ```bash
 bash <(curl -s https://raw.githubusercontent.com/lawrennd/vibesafe/main/scripts/install-minimal.sh)
 ```
 
-This recreates `scripts/`, `whats-next`, `.venv-vibesafe/`, `.cursor/rules/` (with VibeSafe guidance for Cursor AI), and the scaffolding directories. The MATLAB code and `DEMO.md` are untouched.
+> This will creates the vibesafe skeleton structure. Let's have a look, we can see: `scripts/`, `whats-next`, `.venv-vibesafe/`, `.cursor/rules/` (with VibeSafe guidance for Cursor AI), `CLAUDE.md` (with VibeSafe guidance for Calude Code), `AGENTS.md` (with VibeSafe guidance for general agents) and the scaffolding directories. 
+
+> And we can see the old MATLAB code and the notes for this demo, `DEMO.md` they are untouched.
 
 ---
 
@@ -49,17 +45,14 @@ ls   # Should show: DEMO.md  README.md  matlab/
 
 ---
 
-## The Story (Tell This First)
-
-> "Around 2012 I wrote this MATLAB code to demonstrate a concept I'd been thinking about — a falling ball whose trajectory is uncertain, and where you have to control it to land in the right place. The idea connects to decision-making under uncertainty and the mathematics of procrastination — when is it optimal to wait rather than act? I ended up calling it Kappenball.
->
-> The problem is it requires MATLAB. It's 2026 and nobody teaches with MATLAB anymore. I want to modernise it — but more importantly, I want to show you how to use AI assistance *with structure*, so you're not just vibe-coding into the void.
->
-> That structure is called VibeSafe. Let's install it."
-
+> So I talked about breadcrumbs. But what are they in practrice. In practice we'd like them to be useful. And they will provide us with two functions, One, just like in regular agent planning, they provide us with an opportunity to check that the agent understands what we've prompted. The amazing thing about LLMs is that they fill in context when we underspecify. The harrowing thing about LLMs is when that context contains some misunderstanding that we only discover much later when our system falls over in production. So what we do is we work with the LLM to cocreate the intent. ANd of course we get the agent to do most of the work in teh cocreation.
 ---
 
-## STAGE 1: WHY — Install VibeSafe, Define Tenets
+## STAGE 1: WHY — Install VibeSafe, Run What's Next
+
+> Vibesafe centre's around a script, called "what's next". This can be a tool call for the LLM or a call for us. As we can see the install code suggested we run it. Let's see what it says.
+
+> Define Tenets
 
 **Concept**: Before writing a line of new code, we articulate *why* this project exists. **Tenets** are the non-negotiable principles that guide every later decision.
 
