@@ -9,15 +9,15 @@
 
 ## Resetting for a Fresh Demo
 
-This script lives on the `master` branch. After a demo run, VibeSafe will have created directories (`tenets/`, `cip/`, `backlog/`, `requirements/`, `scripts/`, `whats-next`, etc.) and you may have committed files. Run these three commands to wipe everything and return to the clean starting state:
+This script lives on the `master` branch, tagged `demo-start`. After a demo run, VibeSafe will have created directories (`tenets/`, `cip/`, `backlog/`, `requirements/`, `scripts/`, `whats-next`, etc.) and you may have committed files. Run these three commands to wipe everything and return to the clean starting state:
 
 ```bash
 git checkout master
-git reset --hard 4c7b025
+git reset --hard demo-start
 git clean -fd
 ```
 
-- `reset --hard` undoes any commits made during the demo and restores tracked files
+- `reset --hard` rewinds `master` to the `demo-start` tag, undoing any commits made during the demo
 - `clean -fd` removes all untracked files and directories (the VibeSafe scaffold, `.venv-vibesafe/`, etc.)
 
 After running these, `ls` should show only: `README.md  DEMO.md  matlab/`
