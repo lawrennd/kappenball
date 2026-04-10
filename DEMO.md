@@ -80,7 +80,7 @@ ls   # Now shows: matlab/  cip/  tenets/  backlog/  requirements/  scripts/  wha
 
 > "Empty project. No tenets, no CIPs, no requirements. The system is telling us: start with WHY."
 
-### Create the Three Tenets
+### Create the Tenets
 
 **Tell the audience**: "Tenets are *not* goals. They're principles — the things you refuse to compromise on."
 
