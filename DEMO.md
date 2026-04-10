@@ -9,18 +9,30 @@
 
 ## Resetting for a Fresh Demo
 
-This script lives on the `master` branch, tagged `demo-start`. After a demo run, VibeSafe will have created directories (`tenets/`, `cip/`, `backlog/`, `requirements/`, `scripts/`, `whats-next`, etc.) and you may have committed files. Run these three commands to wipe everything and return to the clean starting state:
+This script lives on the `main` branch, tagged `demo-start`. After a demo run, VibeSafe will have created directories and files (`tenets/`, `cip/`, `backlog/`, `requirements/`, `scripts/`, `whats-next`, `.venv-vibesafe/`, `.cursor/`) and you may have committed files. Run these commands to wipe everything and return to the clean starting state:
 
 ```bash
-git checkout master
+git checkout main
 git reset --hard demo-start
-git clean -fd
+git clean -fdx
 ```
 
-- `reset --hard` rewinds `master` to the `demo-start` tag, undoing any commits made during the demo
-- `clean -fd` removes all untracked files and directories (the VibeSafe scaffold, `.venv-vibesafe/`, etc.)
+- `reset --hard` rewinds `main` to the `demo-start` tag, undoing any commits made during the demo
+- `clean -fdx` removes **all** untracked files and directories including hidden ones (`.cursor/` with VibeSafe cursor rules, `.venv-vibesafe/`, etc.)
 
-After running these, `ls` should show only: `README.md  DEMO.md  matlab/`
+After running these, `ls -a` should show only: `. .. .git README.md DEMO.md matlab/`
+
+> **Note on `-x` flag**: `git clean -fdx` also removes files that are listed in `.gitignore`. This is intentional — we want a truly clean slate including any cached artefacts. If a `.gitignore` is added to the repo in future, review this step.
+
+### At the Start of Each Demo
+
+VibeSafe and its Cursor rules must be reinstalled fresh each time. This is the first live step of the demo:
+
+```bash
+bash <(curl -s https://raw.githubusercontent.com/lawrennd/vibesafe/main/scripts/install-minimal.sh)
+```
+
+This recreates `scripts/`, `whats-next`, `.venv-vibesafe/`, `.cursor/rules/` (with VibeSafe guidance for Cursor AI), and the scaffolding directories. The MATLAB code and `DEMO.md` are untouched.
 
 ---
 
@@ -32,7 +44,7 @@ After running these, `ls` should show only: `README.md  DEMO.md  matlab/`
 - [ ] Cursor IDE open on the repo, terminal at `/Users/neil/lawrennd/kappenball`
 
 ```bash
-ls   # Should show: README.md  matlab/
+ls   # Should show: DEMO.md  README.md  matlab/
 ```
 
 ---
