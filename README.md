@@ -18,7 +18,7 @@ The original 2012 MATLAB code lives in `matlab/`:
 
 ## Running the MATLAB demos
 
-Open MATLAB (or GNU Octave — `brew install octave`) and run:
+Open MATLAB and run:
 
 ```matlab
 cd matlab
