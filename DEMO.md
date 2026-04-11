@@ -43,6 +43,16 @@ bash <(curl -s https://raw.githubusercontent.com/lawrennd/vibesafe/main/scripts/
 ls   # Should show: DEMO.md  README.md  matlab/
 ```
 
+### Create a demo branch
+
+Create a dated branch before doing anything else. This keeps `main` clean and makes the reset after the demo as simple as deleting the branch.
+
+```bash
+git checkout -b demo/$(date +%Y-%m-%d)
+```
+
+All commits made during the demo (VibeSafe scaffolding, CIPs, backlog tasks, `kappenball.html`, etc.) land on this branch. `main` is never touched.
+
 ---
 
 > So I talked about breadcrumbs. But what are they in practrice. In practice we'd like them to be useful. And they will provide us with two functions, One, just like in regular agent planning, they provide us with an opportunity to check that the agent understands what we've prompted. The amazing thing about LLMs is that they fill in context when we underspecify. The harrowing thing about LLMs is when that context contains some misunderstanding that we only discover much later when our system falls over in production. So what we do is we work with the LLM to cocreate the intent. ANd of course we get the agent to do most of the work in teh cocreation.
