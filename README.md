@@ -30,10 +30,21 @@ demEntropyBilliards    % entropy billiards
 
 This repo is also used to demonstrate [VibeSafe](https://github.com/lawrennd/vibesafe) — a structured approach to AI-assisted development using the **WHY → WHAT → HOW → DO** process. See `DEMO.md` for a step-by-step walkthrough of installing VibeSafe and building a JavaScript web app version of Kappenball from scratch, live.
 
-To reset to the clean demo starting point at any time:
+
+## Resetting for a Fresh Demo
+
+This script lives on the `main` branch, tagged `demo-start`. After a demo run, VibeSafe will have created directories and files (`tenets/`, `cip/`, `backlog/`, `requirements/`, `scripts/`, `whats-next`, `.venv-vibesafe/`, `.cursor/`) and you may have committed files. Run these commands to wipe everything and return to the clean starting state:
 
 ```bash
 git checkout main
 git reset --hard demo-start
 git clean -fd
 ```
+
+- `reset --hard` rewinds `main` to the `demo-start` tag, undoing any commits made during the demo
+- `clean -fd` removes untracked files and directories (`.cursor/`, `.venv-vibesafe/`, `tenets/`, `cip/`, etc.)
+
+Files listed in `.gitignore` — such as `*.code-workspace` and IDE settings — are preserved across resets.
+
+After running these, `ls` should show only: `DEMO.md  README.md  matlab/`
+
