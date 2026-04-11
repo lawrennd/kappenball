@@ -2,7 +2,7 @@
 
 Kappenball is an interactive simulation game for exploring **uncertainty, decision-making, and the mathematics of procrastination**. A ball falls through a noisy channel and you must steer it to land in the right place — but the uncertainty in its trajectory means acting too early can be worse than waiting.
 
-Created by [Neil Lawrence](https://inverseprobability.com) around 2012 as a playful way to build intuition for probabilistic inference and optimal control under uncertainty. It is discussed in his book [The Atomic Human](https://atomichuman.com).
+Created by [Neil Lawrence](https://inverseprobability.com) around 2012 as part of his inaugural lecture. It's a way of showing how uncertainty influences decision making.
 
 ## What's in this repo
 
